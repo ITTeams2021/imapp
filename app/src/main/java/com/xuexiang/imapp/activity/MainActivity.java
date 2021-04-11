@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
+    @Override
     public void onClick(View v){
         String uname = user_name.getEditValue();
         String upass = user_password.getEditValue();

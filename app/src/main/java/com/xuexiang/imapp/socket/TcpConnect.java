@@ -129,7 +129,7 @@ public class TcpConnect {
                 socket.close();
                 if (socket.isClosed()) {
                     if (disconnectedCallback != null) {
-                        disconnectedCallback.callback(new IOException("断开连接"));
+                        disconnectedCallback.callback(new IOException("disconnect"));
                     }
                 }
             } catch (IOException e) {
@@ -143,11 +143,11 @@ public class TcpConnect {
     public void receive() {
         while (isConnected()) {
             try {
-                /**得到的是16进制数，需要进行解析*/
+                /**convert data*/
                 byte[] bt = new byte[1024];
-//                获取接收到的字节和字节数
+//                get the len of byte
                 int length = inputStream.read(bt);
-//                获取正确的字节
+//               get the right size of byte
                 byte[] bs = new byte[length];
                 System.arraycopy(bt, 0, bs, 0, length);
 
@@ -157,9 +157,9 @@ public class TcpConnect {
                         receivedCallback.callback(str);
                     }
                 }
-                Log.i(TAG,"接收成功");
+                Log.i(TAG,"Receive successfully");
             } catch (IOException e) {
-                Log.i(TAG,"接收失败");
+                Log.i(TAG,"Receive fail");
             }
         }
     }
