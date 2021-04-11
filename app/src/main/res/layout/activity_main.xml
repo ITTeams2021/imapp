@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp"
+            app:srcCompat="@mipmap/logo" />
+
+
+        <TextView
+            style="@style/TextStyle.Title"
+            android:layout_width="match_parent"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30sp"
+            android:text="Instant Messaging"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="30sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center_vertical"
+                android:tint="?attr/colorAccent"
+                app:srcCompat="@drawable/ic_phone" />
+
+            <com.xuexiang.xui.widget.edittext.materialedittext.MaterialEditText
+                android:id="@+id/user_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="36dp"
+                android:hint="@string/user_name"
+                android:inputType="text"
+                app:met_clearButton="true"
+                app:met_floatingLabel="normal" />
+
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:id="@+id/fl_verify_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center_vertical"
+                android:tint="?attr/colorAccent"
+                app:srcCompat="@drawable/ic_password" />
+
+            <com.xuexiang.xui.widget.edittext.materialedittext.MaterialEditText
+                android:id="@+id/user_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="36dp"
+                android:hint="@string/title_password"
+                android:inputType="text"
+                app:met_clearButton="false"
+                app:met_floatingLabel="normal"
+                app:met_maxCharacters="4" />
+
+
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <com.xuexiang.xui.widget.textview.supertextview.SuperButton
+        android:id="@+id/btn_login"
+        style="@style/SuperButton.Primary.Login"
+        android:layout_marginTop="16dp"
+        android:onClick="onClick"
+        android:text="@string/title_login_register" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="20dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TextStyle.Explain"
+                android:layout_width="wrap_content"
+                android:text="Log in/register means you agree  "
+                android:textColor="@color/xui_config_color_primary_text" />
+
+            <com.xuexiang.xui.widget.alpha.XUIAlphaTextView
+                android:id="@+id/tv_user_protocol"
+                style="@style/TextStyle.Explain"
+                android:layout_width="wrap_content"
+                android:text="User Agreement"
+                android:textColor="?attr/colorAccent" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+
+</LinearLayout>

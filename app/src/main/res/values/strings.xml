@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">InstantMessaging</string>
+    <string name="logo_description">this is logo</string>
+    <string name="user_name">User Name</string>
+
+    <string name="title_login_register">Login/Register</string>
+
+    <string name="title_login">Log In</string>
+    <string name="title_register">Register</string>
+    <string name="lab_forget_password">Forget password?</string>
+    <string name="title_password">password</string>
+    <string name="title_forget_password">Reset Password</string>
+    <string name="lab_register_account">Click register means you agree</string>
+    <string name="lab_service_protocol"><![CDATA[<User Agreement>]]></string>
+
+    <string name="connecting_text">Connecting&#8230;</string>
+    <string name="connected_text">Connect successful！</string>
+    <string name="connection_error_text">Connect fail！</string>
+
+    <string name="tip_info">Tip</string>
+    <string name="content_simple_confirm_dialog">请注意，这是一个简单的提示性对话框！</string>
+    <string name="lab_submit">确定</string>
+    <string name="tip_warning">警告</string>
+</resources>
