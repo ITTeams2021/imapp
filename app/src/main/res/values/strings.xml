@@ -18,7 +18,10 @@
     <string name="connection_error_text">Connect fail！</string>
 
     <string name="tip_info">Tip</string>
-    <string name="content_simple_confirm_dialog">请注意，这是一个简单的提示性对话框！</string>
-    <string name="lab_submit">确定</string>
-    <string name="tip_warning">警告</string>
+    <string name="content_simple_confirm_dialog">This is a simple tips！</string>
+    <string name="lab_submit">ok</string>
+    <string name="tip_warning">warining</string>
+
+    <string name="contact_title">Contacts</string>
+
 </resources>

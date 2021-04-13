@@ -19,9 +19,12 @@ package com.xuexiang.imapp.socket;
 
 import android.util.Log;
 
+import org.json.JSONException;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.Socket;
 
 /**
@@ -77,7 +80,8 @@ public class TcpConnect {
             public void run() {
                 try {
                     socket = new Socket(ipAddress, port);
-//                    socket.setSoTimeout ( 2 * 1000 );//设置超时时间
+                    socket.setSoTimeout ( 2 * 1000 );//设置超时时间
+                    socket.setKeepAlive(true);
                     if (isConnected()) {
                         TcpConnect.sharedCenter().ipAddress = ipAddress;
                         TcpConnect.sharedCenter().port = port;
@@ -96,7 +100,7 @@ public class TcpConnect {
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
-                    Log.e(TAG,"Connect error");
+                    Log.e(TAG,"Connect error" + e.toString());
                     if (disconnectedCallback != null) {
                         disconnectedCallback.callback(e);
                     }
@@ -145,21 +149,25 @@ public class TcpConnect {
             try {
                 /**convert data*/
                 byte[] bt = new byte[1024];
-//                get the len of byte
+                //get the len of byte
                 int length = inputStream.read(bt);
-//               get the right size of byte
-                byte[] bs = new byte[length];
-                System.arraycopy(bt, 0, bs, 0, length);
 
-                String str = new String(bs, "UTF-8");
-                if (str != null) {
-                    if (receivedCallback != null) {
-                        receivedCallback.callback(str);
+                if(length > 0)
+                {
+                    //get the right size of byte
+                    byte[] bs = new byte[length];
+                    System.arraycopy(bt, 0, bs, 0, length);
+
+                    String str = new String(bs, "utf-8");
+                    if (str != null) {
+                        if (receivedCallback != null) {
+                            receivedCallback.callback(str);
+                        }
                     }
                 }
-                Log.i(TAG,"Receive successfully");
-            } catch (IOException e) {
-                Log.i(TAG,"Receive fail");
+//                Log.i(TAG,"Receive successfully");
+            } catch (IOException | JSONException e) {
+                Log.i(TAG,"Receive fail" + e.toString());
             }
         }
     }
@@ -196,7 +204,7 @@ public class TcpConnect {
         void callback(IOException e);
     }
     public interface OnReceiveCallbackBlock {
-        void callback(String receicedMessage);
+        void callback(String receivedMessage) throws UnsupportedEncodingException, JSONException;
     }
 
     public void setConnectedCallback(OnServerConnectedCallbackBlock connectedCallback) {
