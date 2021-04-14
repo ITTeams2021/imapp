@@ -21,7 +21,11 @@
     <string name="content_simple_confirm_dialog">This is a simple tips！</string>
     <string name="lab_submit">ok</string>
     <string name="tip_warning">warining</string>
+    <string name="voide_btn_title">Voice</string>
+    <string name="send_btn_title">Send</string>
 
     <string name="contact_title">Contacts</string>
+    <string name="text_chat">message</string>
+    <string name="text_input">input the message</string>
 
 </resources>

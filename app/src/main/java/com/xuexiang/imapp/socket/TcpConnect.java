@@ -80,7 +80,7 @@ public class TcpConnect {
             public void run() {
                 try {
                     socket = new Socket(ipAddress, port);
-                    socket.setSoTimeout ( 2 * 1000 );//设置超时时间
+                    socket.setSoTimeout (10000);//设置超时时间
                     socket.setKeepAlive(true);
                     if (isConnected()) {
                         TcpConnect.sharedCenter().ipAddress = ipAddress;

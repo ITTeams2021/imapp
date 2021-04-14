@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="bottom" >
+
+    <TextView
+        android:id="@+id/text_chat_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:height="30sp"
+        android:background="@color/colorPrimary"
+        android:paddingTop="10sp"
+        android:paddingBottom="10sp"
+        android:textAlignment="center"
+        android:textColor="@color/xui_config_color_white"
+        android:textSize="@dimen/xui_config_size_title_text_tablet_big"
+        android:layout_weight="0"
+        android:hint="@string/text_chat"/>
+
+    <fragment
+        android:id="@+id/fragment"
+        android:name="com.xuexiang.imapp.Fragment.TextChatListFragment"
+        android:layout_width="match_parent"
+        android:layout_height="490dp"
+        android:layout_weight="0"
+        tools:layout="@layout/fragment_chat_text_list" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="10"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/voice_call"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/voide_btn_title" />
+
+        <EditText
+            android:id="@+id/editTextTextPersonName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/text_input"
+            android:inputType="textPersonName" />
+
+        <Button
+            android:id="@+id/send_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/send_btn_title" />
+    </LinearLayout>
+
+</LinearLayout>

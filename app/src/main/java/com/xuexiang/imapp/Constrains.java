@@ -10,5 +10,6 @@ import org.json.JSONArray;
 public class Constrains {
 
     public static JSONArray contact_list;
+    public static String current_chat_user;
 
 }

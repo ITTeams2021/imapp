@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/contacts_title"
+        android:id="@+id/text_chat_title"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:height="30sp"
@@ -20,7 +20,7 @@
         />
 
     <ListView
-        android:id="@+id/lv_demo1"
+        android:id="@+id/message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
