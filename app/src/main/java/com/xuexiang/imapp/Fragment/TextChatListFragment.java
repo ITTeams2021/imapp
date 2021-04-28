@@ -21,7 +21,8 @@ import androidx.fragment.app.Fragment;
 public class TextChatListFragment extends Fragment {
 
 //    private String[] data = {"SuYuAn : Hello！", "You : Hi!"};
-    private String[] data={};
+    private String[] data = {};
+
     private ListView listView;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,11 +39,5 @@ public class TextChatListFragment extends Fragment {
         listView.setAdapter(adapter);
 
         return view;
-    }
-
-    public void update(String[] data){
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                this.getActivity(),android.R.layout.simple_list_item_1,data);
-        listView.setAdapter(adapter);
     }
 }

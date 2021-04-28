@@ -2,11 +2,8 @@ package com.xuexiang.imapp.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.text.SpannableString;
 import android.util.Log;
-import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -15,7 +12,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.xuexiang.adapter.ChatMessageAdapter;
 import com.xuexiang.imapp.Constraints;
 import com.xuexiang.imapp.R;
 import com.xuexiang.imapp.socket.TcpConnect;
@@ -26,11 +22,6 @@ import com.xuexiang.xpage.enums.CoreAnim;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Date;
-import java.util.List;
-
-import bean.ChatMessage;
-
 import static com.xuexiang.imapp.Constraints.current_chat_user;
 import static com.xuexiang.imapp.Constraints.current_user_name;
 
@@ -38,7 +29,8 @@ import static com.xuexiang.imapp.Constraints.current_user_name;
 public class TextChatActivity extends AppCompatActivity {
 
 //    private String[] data = {"SuYuAn : Hello！", "You : Hi!"};
-    private UdpConnect udpConnect=null;
+    private String[] chat_data;
+    private UdpConnect udpconnect;
     private Button sendBtn;
     private Button voiceBtn;
     private TextView chat_title;
@@ -53,23 +45,23 @@ public class TextChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_text_chat);
-        TcpConnect.sharedCenter().connect(Constraints.TCP_IP_ADDRESS, Constraints.TCP_PORT);
-        udpConnect.getUdpConnect();
-        udpConnect.startUDPSocket();
-
         initView();
         //set the title to the username that you chat with
         chat_title.setText(Constraints.current_chat_user);
         initListener();
-        receiveMsg();
+
+        TcpConnect.sharedCenter().connect(Constraints.TCP_IP_ADDRESS, Constraints.TCP_PORT);
+        udpconnect = udpconnect.getUdpConnect();
+
+       receiveMsg();
     }
 
-//    public void setData(String[] data) {
-//        this.data = data;
-//    }
+    public void setChatData(String[] data) {
+        this.chat_data = data;
+    }
 
     private void initListener() {
-        // send message
+         //send message
         sendBtn.setOnClickListener(v -> {
             send_msg = editText.getText().toString();
             if (send_msg.length() == 0) {
@@ -78,24 +70,27 @@ public class TextChatActivity extends AppCompatActivity {
             }
             try {
                 String data = createJson(current_user_name, send_msg, current_chat_user);
-                udpConnect.sendMessage(data);
+                udpconnect.sendMessage(data);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            ChatMessage toMsg = new ChatMessage();
-            toMsg.setName(current_user_name);
-            toMsg.setMsg(send_msg);
 
-            Constraints.myDatas.add(toMsg);
-            Constraints.myAdapter.notifyDataSetChanged();
-            Constraints.myMsgs.setSelection(Constraints.myMsgs.getCount() - 1);
+            String[] data = new String[1];
+            data[0] = current_user_name + ": " + send_msg;
+            setChatData(data);
+
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                    TextChatActivity.this,android.R.layout.simple_list_item_1,data);
+            ListView listView = (ListView) findViewById(R.id.message);
+            listView.setAdapter(adapter);
+
             editText.setText("");
         });
 
-        // voice call
-        voiceBtn.setOnClickListener(v -> {
-            jumpToCall();
-        });
+//        // voice call
+//        voiceBtn.setOnClickListener(v -> {
+//            jumpToCall();
+//        });
     }
 
     // initiate View
@@ -104,16 +99,16 @@ public class TextChatActivity extends AppCompatActivity {
         voiceBtn = findViewById(R.id.voice_call);
         chat_title = findViewById(R.id.text_chat_title);
         editText = findViewById(R.id.editTextTextPersonName);
-        Constraints.myMsgs = findViewById(R.id.list_view_msg);
+
     }
 
     // udp json format
     private String createJson(String uname, String message, String fname) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("type", "text");
-        jsonObject.put("from", uname);
+//        jsonObject.put("from", uname);
         jsonObject.put("to", fname);
-//        jsonObject.put("session", session_id);
+        jsonObject.put("session", session_id);
         jsonObject.put("message", message);
         String data = jsonObject.toString();
         Log.i("json:", data);

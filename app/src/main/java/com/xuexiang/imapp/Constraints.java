@@ -1,14 +1,6 @@
 package com.xuexiang.imapp;
 
-import android.widget.ListView;
-
-import com.xuexiang.adapter.ChatMessageAdapter;
-
 import org.json.JSONArray;
-
-import java.util.List;
-
-import bean.ChatMessage;
 
 /**
  * @author: Su Yuan
@@ -28,7 +20,4 @@ public class Constraints {
     public static final String SOCKET_HOST = "159.75.220.96";
     public static final Integer SOCKET_UDP_PORT=7777;
 
-    public static ListView myMsgs; //listView
-    public static ChatMessageAdapter myAdapter;
-    public static List<ChatMessage> myDatas;
 }

@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 
 
@@ -21,7 +23,6 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
-import bean.ChatMessage;
 import butterknife.BindView;
 
 import static com.xuexiang.imapp.Constraints.*;
@@ -84,13 +85,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if(Constraints.current_chat_user.equals(friend_name)){
                         Constraints.msg_content = msg_content;
 
-                        ChatMessage fromMsg = new ChatMessage();
-                        fromMsg.setName(current_user_name);
-                        fromMsg.setMsg(msg_content);
-
-                        myDatas.add(fromMsg);
-                        myAdapter.notifyDataSetChanged();
-                        myMsgs.setSelection(myMsgs.getCount() - 1);
+//                        String[] data = new String[1];
+//                        data[0] = friend_name + ": " + msg_content;
+//                        setChatData(data);
+//
+//                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+//                                TextChatActivity.this,android.R.layout.simple_list_item_1,data);
+//                        ListView listView = (ListView) findViewById(R.id.message);
+//                        listView.setAdapter(adapter);
                     }
                 }
             }

@@ -55,8 +55,6 @@ public class UdpConnect {
 
     private OnUDPReceiveCallbackBlock udpReceiveCallback;
 
-
-
     private UdpConnect() {
         super();
         int cpuNumbers = Runtime.getRuntime().availableProcessors();
