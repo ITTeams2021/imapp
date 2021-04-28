@@ -3,7 +3,6 @@ package com.xuexiang.imapp.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -17,7 +16,7 @@ import com.xuexiang.xpage.enums.CoreAnim;
 import org.json.JSONException;
 
 @Page(name = "contacts", anim = CoreAnim.none)
-public class ContactActivity extends AppCompatActivity implements View.OnClickListener{
+public class ContactActivity extends AppCompatActivity{
 
     private String[] data;
 
@@ -44,8 +43,8 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
                 (parent, view, position, id) -> {
                     Log.i("item", "parent" + parent.toString() + "position" + position + "id" + id);
                     try {
-                        String user_name = Constraints.contact_list.get(position).toString();
-                        Constraints.current_chat_user = user_name;
+                        String friend_name = Constraints.contact_list.get(position).toString();
+                        Constraints.current_chat_user = friend_name;
                         jump_page();
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -58,10 +57,6 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
         this.data = data;
     }
 
-    @Override
-    public void onClick(View v){
-
-    }
 
     private void jump_page(){
         // jump to contact page

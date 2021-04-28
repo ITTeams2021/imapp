@@ -20,13 +20,15 @@
         android:layout_weight="0"
         android:hint="@string/text_chat"/>
 
-    <fragment
-        android:id="@+id/fragment"
-        android:name="com.xuexiang.imapp.Fragment.TextChatListFragment"
+    <ListView
+        android:id="@+id/list_view_msg"
         android:layout_width="match_parent"
-        android:layout_height="490dp"
+        android:layout_height="604dp"
+        android:layout_above="@+id/bottom_bar"
+        android:layout_below="@+id/title_bar"
         android:layout_weight="0"
-        tools:layout="@layout/fragment_chat_text_list" />
+        android:divider="@null"
+        android:dividerHeight="3dp"></ListView>
 
     <LinearLayout
         android:layout_width="match_parent"

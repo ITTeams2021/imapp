@@ -21,7 +21,10 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
+import bean.ChatMessage;
 import butterknife.BindView;
+
+import static com.xuexiang.imapp.Constraints.*;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -33,6 +36,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private boolean receive_state = false;
     private String receive_data = "";
     private String session_id = "";
+    private String friend_name="";
+    private String msg_content="";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,12 +68,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Log.i("received_msg", receivedMessage);
                 receive_data = receivedMessage;
                 JSONObject rec_data = new JSONObject(receive_data);
-                session_id = rec_data.get("session_id").toString();
-                JSONArray receiver = new JSONArray(rec_data.get("receivers").toString());
-                Constraints.contact_list = receiver;
+                // determine message type
+                if(rec_data.has("receivers")){
+                    session_id = rec_data.get("session_id").toString();
+                    Constraints.session_id = session_id;
+                    JSONArray receiver = new JSONArray(rec_data.get("receivers").toString());
+                    Constraints.contact_list = receiver;
 
-                jump_page();
-                Log.i("session", receiver.get(0).toString());
+                    jump_page();
+                    Log.i("session", receiver.get(0).toString());
+                }
+                else{
+                    friend_name = rec_data.get("from").toString();
+                    msg_content = rec_data.get("message").toString();
+                    if(Constraints.current_chat_user.equals(friend_name)){
+                        Constraints.msg_content = msg_content;
+
+                        ChatMessage fromMsg = new ChatMessage();
+                        fromMsg.setName(current_user_name);
+                        fromMsg.setMsg(msg_content);
+
+                        myDatas.add(fromMsg);
+                        myAdapter.notifyDataSetChanged();
+                        myMsgs.setSelection(myMsgs.getCount() - 1);
+                    }
+                }
             }
         });
     }
@@ -76,6 +101,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v){
         String uname = user_name.getEditValue();
         String upass = user_password.getEditValue();
+        current_user_name = uname;
+
 //        uname = "ChenLu";
 //        upass = "cl961007";
 

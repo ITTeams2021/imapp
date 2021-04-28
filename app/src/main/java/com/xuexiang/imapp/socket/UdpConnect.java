@@ -19,6 +19,8 @@ package com.xuexiang.imapp.socket;
 
 import android.util.Log;
 
+import com.xuexiang.imapp.Constraints;
+
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -26,6 +28,9 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import static com.xuexiang.imapp.Constraints.SOCKET_HOST;
+import static com.xuexiang.imapp.Constraints.SOCKET_UDP_PORT;
 
 /**
  * @author: Su Yuan
@@ -50,8 +55,7 @@ public class UdpConnect {
 
     private OnUDPReceiveCallbackBlock udpReceiveCallback;
 
-    private String  SOCKET_HOST  = "255.255.255.255";
-    private int SOCKET_UDP_PORT  = 24680;
+
 
     private UdpConnect() {
         super();
@@ -75,7 +79,7 @@ public class UdpConnect {
         if (client != null) return;
         try {
 //          listen the port
-            client = new DatagramSocket(SOCKET_UDP_PORT);
+            client = new DatagramSocket(Constraints.SOCKET_UDP_PORT);
 
             if (receivePacket == null) {
                 receivePacket = new DatagramPacket(receiveByte, BUFFER_LENGTH);
@@ -158,7 +162,6 @@ public class UdpConnect {
             public void run() {
                 try {
                     InetAddress targetAddress = InetAddress.getByName(SOCKET_HOST);
-
                     DatagramPacket packet = new DatagramPacket(message.getBytes(), message.length(), targetAddress, SOCKET_UDP_PORT);
                     client.send(packet);
                 } catch (IOException e) {
