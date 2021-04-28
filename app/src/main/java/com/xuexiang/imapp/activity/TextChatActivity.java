@@ -10,8 +10,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.xuexiang.imapp.Constrains;
+import com.xuexiang.imapp.Constraints;
 import com.xuexiang.imapp.R;
+import com.xuexiang.imapp.socket.TcpConnect;
 import com.xuexiang.xpage.annotation.Page;
 import com.xuexiang.xpage.enums.CoreAnim;
 
@@ -26,6 +27,7 @@ public class TextChatActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_text_chat);
+        TcpConnect.sharedCenter().connect(Constraints.TCP_IP_ADDRESS, Constraints.TCP_PORT);
 
 //        data = new String[Constrains.contact_list.length()];
 //        for(int i = 0; i < Constrains.contact_list.length(); i++){
@@ -36,7 +38,7 @@ public class TextChatActivity extends AppCompatActivity implements View.OnClickL
 //            }
 //        }
         TextView chat_title = findViewById(R.id.text_chat_title);
-        chat_title.setText(Constrains.current_chat_user);
+        chat_title.setText(Constraints.current_chat_user);
 
     }
 

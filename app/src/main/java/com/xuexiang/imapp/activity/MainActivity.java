@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Toast;
 
 
-import com.xuexiang.imapp.Constrains;
+import com.xuexiang.imapp.Constraints;
 import com.xuexiang.imapp.R;
 import com.xuexiang.imapp.socket.TcpConnect;
 import com.xuexiang.xui.widget.edittext.materialedittext.MaterialEditText;
@@ -33,9 +33,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private boolean receive_state = false;
     private String receive_data = "";
     private String session_id = "";
-
-    public static final String TCP_IP_ADDRESS = "159.75.220.96";
-    public static final Integer TCP_PORT = 8888;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 JSONObject rec_data = new JSONObject(receive_data);
                 session_id = rec_data.get("session_id").toString();
                 JSONArray receiver = new JSONArray(rec_data.get("receivers").toString());
-                Constrains.contact_list = receiver;
+                Constraints.contact_list = receiver;
 
                 jump_page();
                 Log.i("session", receiver.get(0).toString());
@@ -79,10 +76,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v){
         String uname = user_name.getEditValue();
         String upass = user_password.getEditValue();
-        uname = "ChenLu";
-        upass = "cl961007";
+//        uname = "ChenLu";
+//        upass = "cl961007";
 
-        TcpConnect.sharedCenter().connect(TCP_IP_ADDRESS, TCP_PORT);
+        TcpConnect.sharedCenter().connect(Constraints.TCP_IP_ADDRESS, Constraints.TCP_PORT);
         receive_state = false;
 
         if(uname.length() == 0){

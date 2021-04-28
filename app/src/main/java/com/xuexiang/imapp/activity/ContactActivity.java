@@ -9,7 +9,7 @@ import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.xuexiang.imapp.Constrains;
+import com.xuexiang.imapp.Constraints;
 import com.xuexiang.imapp.R;
 import com.xuexiang.xpage.annotation.Page;
 import com.xuexiang.xpage.enums.CoreAnim;
@@ -26,10 +26,10 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact);
 
-        data = new String[Constrains.contact_list.length()];
-        for(int i = 0; i < Constrains.contact_list.length(); i++){
+        data = new String[Constraints.contact_list.length()];
+        for(int i = 0; i < Constraints.contact_list.length(); i++){
             try {
-                data[i] = Constrains.contact_list.get(i).toString();
+                data[i] = Constraints.contact_list.get(i).toString();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -44,8 +44,8 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
                 (parent, view, position, id) -> {
                     Log.i("item", "parent" + parent.toString() + "position" + position + "id" + id);
                     try {
-                        String user_name = Constrains.contact_list.get(position).toString();
-                        Constrains.current_chat_user = user_name;
+                        String user_name = Constraints.contact_list.get(position).toString();
+                        Constraints.current_chat_user = user_name;
                         jump_page();
                     } catch (JSONException e) {
                         e.printStackTrace();
