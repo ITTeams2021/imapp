@@ -27,16 +27,6 @@ public class TextChatActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_text_chat);
-        TcpConnect.sharedCenter().connect(Constraints.TCP_IP_ADDRESS, Constraints.TCP_PORT);
-
-//        data = new String[Constrains.contact_list.length()];
-//        for(int i = 0; i < Constrains.contact_list.length(); i++){
-//            try {
-//                data[i] = Constrains.contact_list.get(i).toString();
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-//        }
         TextView chat_title = findViewById(R.id.text_chat_title);
         chat_title.setText(Constraints.current_chat_user);
 

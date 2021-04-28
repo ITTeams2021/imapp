@@ -76,8 +76,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v){
         String uname = user_name.getEditValue();
         String upass = user_password.getEditValue();
-//        uname = "ChenLu";
-//        upass = "cl961007";
+        uname = "ChenLu";
+        upass = "cl961007";
 
         TcpConnect.sharedCenter().connect(Constraints.TCP_IP_ADDRESS, Constraints.TCP_PORT);
         receive_state = false;
