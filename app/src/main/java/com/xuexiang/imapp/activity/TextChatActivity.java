@@ -54,6 +54,7 @@ public class TextChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_text_chat);
         TcpConnect.sharedCenter().connect(Constraints.TCP_IP_ADDRESS, Constraints.TCP_PORT);
+        udpConnect.getUdpConnect();
         udpConnect.startUDPSocket();
 
         initView();
