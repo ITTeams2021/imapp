@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.Toast;
 
 
@@ -38,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String receive_data = "";
     private String session_id = "";
     private String friend_name="";
-    private String msg_content="";
+    private String msg_recv="";
 
 
     @Override
@@ -48,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         user_name = findViewById(R.id.user_name);
         user_password = findViewById(R.id.user_password);
+
         findViewById(R.id.btn_login).setOnClickListener(this);
 
         TcpConnect.sharedCenter().setDisconnectedCallback(new TcpConnect.OnServerDisconnectedCallbackBlock() {
@@ -81,8 +80,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 else{
                     if(rec_data.has("type")) {
-                        msg_content = rec_data.get("message").toString();
-                        Constraints.msg_content = msg_content;
+                        msg_recv = rec_data.get("message").toString();
+                        Constraints.msg_recv = msg_recv;
+                        String data = current_chat_user + ": " + msg_recv;
+                        Constraints.msg_recv = data;
+                        Constraints.new_recv = true;
                     }
                 }
             }
@@ -93,11 +95,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v){
         String uname = user_name.getEditValue();
         String upass = user_password.getEditValue();
-        current_user_name = uname;
 
-        uname = "ChenLu";
-        upass = "cl961007";
+//        uname = "ChenLu";
+//        upass = "cl961007";
 
+        Constraints.current_user_name = uname;
         TcpConnect.sharedCenter().connect(Constraints.TCP_IP_ADDRESS, Constraints.TCP_PORT);
         receive_state = false;
 

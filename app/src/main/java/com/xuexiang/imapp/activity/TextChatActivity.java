@@ -32,7 +32,7 @@ import static com.xuexiang.imapp.Constraints.current_user_name;
 public class TextChatActivity extends AppCompatActivity {
 
 //    private String[] data = {"SuYuAn : Hello！", "You : Hi!"};
-    private String[] chat_data;
+
     private UdpConnect udpconnect;
     private Button sendBtn;
     private Button voiceBtn;
@@ -58,17 +58,6 @@ public class TextChatActivity extends AppCompatActivity {
 
         receiveMsg();
 
-//        Button sendBtn = (Button)findViewById(R.id.send_btn);
-//        sendBtn.setOnClickListener(new Button.OnClickListener(){
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
-    }
-
-    public void setChatData(String[] data) {
-        this.chat_data = data;
     }
 
     private void initListener() {
@@ -86,15 +75,9 @@ public class TextChatActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            String[] data = new String[1];
-            data[0] = current_user_name + ": " + send_msg;
-            setChatData(data);
-
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                    TextChatActivity.this,android.R.layout.simple_list_item_1,data);
-            ListView listView = (ListView) findViewById(R.id.message);
-            listView.setAdapter(adapter);
-
+            String data = current_user_name + ": " + send_msg;
+            Constraints.msg_send = data;
+            Constraints.new_send = true;
             editText.setText("");
         });
 

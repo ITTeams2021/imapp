@@ -14,7 +14,10 @@ public class Constraints {
     public static JSONArray contact_list;
     public static String current_user_name;
     public static String current_chat_user;
-    public static String msg_content;
+    public static String msg_recv;
+    public static String msg_send;
+    public static boolean new_send=false;
+    public static boolean new_recv=false;
 
     public static final String TCP_IP_ADDRESS = "159.75.220.96";
     public static final Integer TCP_PORT = 8888;

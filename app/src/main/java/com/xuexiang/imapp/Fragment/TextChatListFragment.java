@@ -17,6 +17,9 @@ import com.xuexiang.imapp.activity.TextChatActivity;
 
 import androidx.fragment.app.Fragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author: Su Yuan
  * @Date: 2021/4/14
@@ -25,12 +28,13 @@ import androidx.fragment.app.Fragment;
 public class TextChatListFragment extends Fragment {
 
 //    private String[] data = {"SuYuAn : Hello！", "You : Hi!"};
-    public String[] data = {};
+    public String[] data = new String[]{};
+    private List<String> saveChatMsg = new ArrayList<String>(); ;
     private View view;
     private ListView listView;
     private Handler receiveHandler;
     private Runnable runnable;
-    private int test_num = 0;
+//    private int test_num = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,9 +63,20 @@ public class TextChatListFragment extends Fragment {
 
     // update chat list
     private void updateChatList(){
-        test_num += 1;
-        data = new String[]{""+ test_num};
-        System.out.println(Constraints.msg_content);
+//        test_num += 1;
+//        data = new String[]{""+ test_num};
+        if(Constraints.new_send == true) {
+            saveChatMsg.add(Constraints.msg_send);
+            data = (String[]) saveChatMsg.toArray(new String[saveChatMsg.size()]);
+            System.out.println(Constraints.msg_send);
+            Constraints.new_send = false;
+        }
+        if(Constraints.new_recv==true){
+            saveChatMsg.add(Constraints.msg_recv);
+            data = (String[]) saveChatMsg.toArray(new String[saveChatMsg.size()]);
+            System.out.println(Constraints.msg_recv);
+            Constraints.new_recv = false;
+        }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this.getActivity(),android.R.layout.simple_list_item_1, data);
         listView.setAdapter(adapter);
@@ -76,7 +91,8 @@ public class TextChatListFragment extends Fragment {
             @Override
             public void run() {
                 receiveHandler.postDelayed(this, Time);
-                updateChatList();
+                if(Constraints.new_send == true || Constraints.new_recv==true)
+                     updateChatList();
             }
         };
         receiveHandler.postDelayed(runnable, Time);

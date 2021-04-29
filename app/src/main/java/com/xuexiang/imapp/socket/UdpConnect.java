@@ -162,6 +162,7 @@ public class UdpConnect {
                     InetAddress targetAddress = InetAddress.getByName(SOCKET_HOST);
                     DatagramPacket packet = new DatagramPacket(message.getBytes(), message.length(), targetAddress, SOCKET_UDP_PORT);
                     client.send(packet);
+                    Log.i(TAG,"udp packet send successfully");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

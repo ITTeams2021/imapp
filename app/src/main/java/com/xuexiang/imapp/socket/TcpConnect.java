@@ -165,7 +165,6 @@ public class TcpConnect {
                         }
                     }
                 }
-//                Log.i(TAG,"Receive successfully");
             } catch (IOException | JSONException e) {
                 Log.i(TAG,"Receive fail" + e.toString());
             }
