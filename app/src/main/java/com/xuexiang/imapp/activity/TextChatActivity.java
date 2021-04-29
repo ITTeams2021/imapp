@@ -3,6 +3,7 @@ package com.xuexiang.imapp.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -55,7 +56,15 @@ public class TextChatActivity extends AppCompatActivity {
         TcpConnect.sharedCenter().connect(Constraints.TCP_IP_ADDRESS, Constraints.TCP_PORT);
         udpconnect = udpconnect.getUdpConnect();
 
-       receiveMsg();
+        receiveMsg();
+
+//        Button sendBtn = (Button)findViewById(R.id.send_btn);
+//        sendBtn.setOnClickListener(new Button.OnClickListener(){
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
     }
 
     public void setChatData(String[] data) {

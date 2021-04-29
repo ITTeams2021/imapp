@@ -81,19 +81,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 else{
                     if(rec_data.has("type")) {
-                        //friend_name = rec_data.get("from").toString();
                         msg_content = rec_data.get("message").toString();
-//                    if(Constraints.current_chat_user.equals(friend_name)){ }
                         Constraints.msg_content = msg_content;
-
-//                        String[] data = new String[1];
-//                        data[0] = friend_name + ": " + msg_content;
-//                        setChatData(data);
-//
-//                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-//                                TextChatActivity.this,android.R.layout.simple_list_item_1,data);
-//                        ListView listView = (ListView) findViewById(R.id.message);
-//                        listView.setAdapter(adapter);
                     }
                 }
             }
@@ -106,8 +95,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String upass = user_password.getEditValue();
         current_user_name = uname;
 
-//        uname = "ChenLu";
-//        upass = "cl961007";
+        uname = "ChenLu";
+        upass = "cl961007";
 
         TcpConnect.sharedCenter().connect(Constraints.TCP_IP_ADDRESS, Constraints.TCP_PORT);
         receive_state = false;
