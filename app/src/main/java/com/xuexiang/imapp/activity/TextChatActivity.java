@@ -31,17 +31,13 @@ import static com.xuexiang.imapp.Constraints.current_user_name;
 @Page(name = "text_chat", anim = CoreAnim.none)
 public class TextChatActivity extends AppCompatActivity {
 
-//    private String[] data = {"SuYuAn : Hello！", "You : Hi!"};
-
     private UdpConnect udpconnect;
     private Button sendBtn;
     private Button voiceBtn;
     private TextView chat_title;
     private EditText editText;
 
-    private boolean receive_state = false;
     private String receive_data = "";
-    private String session_id = "";
     private String send_msg = "";
 
     @Override
@@ -55,9 +51,7 @@ public class TextChatActivity extends AppCompatActivity {
 
         TcpConnect.sharedCenter().connect(Constraints.TCP_IP_ADDRESS, Constraints.TCP_PORT);
         udpconnect = udpconnect.getUdpConnect();
-
         receiveMsg();
-
     }
 
     private void initListener() {
@@ -102,16 +96,12 @@ public class TextChatActivity extends AppCompatActivity {
         jsonObject.put("type", "text");
 //        jsonObject.put("from", uname);
         jsonObject.put("to", fname);
-        jsonObject.put("session", session_id);
+        jsonObject.put("session", Constraints.session_id);
         jsonObject.put("message", message);
         String data = jsonObject.toString();
         Log.i("json:", data);
         return data;
     }
-
-    private boolean isRunning = true;
-    private DatagramSocket sendSocket = null;
-    private int receivePort = 8856;
 
     private void receiveMsg() {
         new Thread(new Runnable() {
