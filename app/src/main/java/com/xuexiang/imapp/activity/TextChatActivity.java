@@ -22,6 +22,8 @@ import com.xuexiang.xpage.enums.CoreAnim;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.DatagramSocket;
+
 import static com.xuexiang.imapp.Constraints.current_chat_user;
 import static com.xuexiang.imapp.Constraints.current_user_name;
 
@@ -114,6 +116,10 @@ public class TextChatActivity extends AppCompatActivity {
         Log.i("json:", data);
         return data;
     }
+
+    private boolean isRunning = true;
+    private DatagramSocket sendSocket = null;
+    private int receivePort = 8856;
 
     private void receiveMsg() {
         new Thread(new Runnable() {

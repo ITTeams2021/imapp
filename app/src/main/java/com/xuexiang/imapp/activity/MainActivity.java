@@ -80,9 +80,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Log.i("session", receiver.get(0).toString());
                 }
                 else{
-                    friend_name = rec_data.get("from").toString();
-                    msg_content = rec_data.get("message").toString();
-                    if(Constraints.current_chat_user.equals(friend_name)){
+                    if(rec_data.has("type")) {
+                        //friend_name = rec_data.get("from").toString();
+                        msg_content = rec_data.get("message").toString();
+//                    if(Constraints.current_chat_user.equals(friend_name)){ }
                         Constraints.msg_content = msg_content;
 
 //                        String[] data = new String[1];
